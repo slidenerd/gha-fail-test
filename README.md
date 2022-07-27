@@ -385,3 +385,23 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup pytest-sugar
         git push origin head
+
+### 8. Setp pytest-clarity
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install pytest-clarity
+
+        poetry add --dev pytest-clarity
+
+1. Modify *tox.ini* to run pytest with pytest-clarity. The plugin will only be activated when the -vv option is supplied to pytest
+
+        poetry run pytest --cov -vv
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup pytest-clarity
+        git push origin head
