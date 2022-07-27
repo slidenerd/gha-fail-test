@@ -503,3 +503,40 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup flake8-bugbear
         git push origin head
+
+### 11. Setup flake8-docstrings
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install flake8-docstrings
+
+        poetry add --dev flake8-docstrings
+
+1. Check if flake8-docstrings is installed properly. The command below should show flake8-docstrings in the output
+
+        poetry run flake8 --version
+
+1. Add a line to *tox.ini* configuration file under [flake8] to set flake8-docstrings convention
+
+        # https://github.com/PyCQA/flake8-docstrings
+        docstring-convention = google
+
+1. Modify *.pre-commit-config.yaml* file to add flake8-docstrings as an additional dependency
+
+        - repo: https://github.com/PyCQA/flake8
+          rev: 4.0.1
+          # https://flake8.pycqa.org/en/latest/user/using-hooks.html
+          hooks:
+                - additional_dependencies: [flake8-bugbear==22.7.1, flake8-docstrings==1.6.0]
+                  id: flake8
+                  args: [--verbose]
+                  description: Command-line utility for enforcing style consistency across Python projects.
+                  require_serial: true
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup flake8-docstrings
+        git push origin head

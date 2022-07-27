@@ -55,7 +55,7 @@ repos:
     rev: 4.0.1
     # https://flake8.pycqa.org/en/latest/user/using-hooks.html
     hooks:
-      - additional_dependencies: [flake8-bugbear==22.7.1]
+      - additional_dependencies: [flake8-bugbear==22.7.1, flake8-docstrings==1.6.0]
         id: flake8
         description: Command-line utility for enforcing style consistency across Python projects.
         require_serial: true
