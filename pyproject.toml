@@ -9,6 +9,7 @@ python = "^3.10"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.1.2"
+tox = "^3.25.1"
 
 [tool.poetry.scripts]
 news = "news.main:main"

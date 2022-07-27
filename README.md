@@ -169,3 +169,46 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         git commit -m "build: setup poetry"
         git push origin wip/setup-project
+
+### 3. Setup Tox
+
+1. Switch branch
+
+        git switch wip/setup-project
+
+1. Install tox
+
+        poetry add --dev tox
+
+1. Create *tox.ini* file
+
+        # https://python-poetry.org/docs/faq/#is-tox-supported
+        [tox]
+        isolated_build = true
+        envlist = py310
+        # https://tox.wiki/en/latest/config.html#conf-skipsdist
+        skipsdist = true
+
+        # We need this for passing environment variables down to tox
+        # https://tox.wiki/en/latest/example/basic.html#passing-down-environment-variables
+        [testenv]
+        whitelist_externals = poetry
+        commands =
+                poetry install -v
+                poetry run pytest tests/
+
+1. Run tox
+
+        poetry run tox
+
+1. Run tox in verbose mode while recreating the environment
+
+        # https://tox.wiki/en/latest/config.html#cmdoption-tox-v
+        # https://tox.wiki/en/latest/config.html#cmdoption-tox-r
+        poetry run tox --verbose --recreate
+
+1. Save changes
+
+        git add .
+        git commit -m "build: setup tox"
+        git push origin head
