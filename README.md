@@ -405,3 +405,65 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup pytest-clarity
         git push origin head
+
+### 9. Setup Flake8
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install flake8
+
+        poetry add --dev flake8
+
+1. Check if flake8 is installed properly
+
+        poetry run flake8 --version
+
+1. Help
+
+        poetry run flake8 --help
+
+1. Add the following section to *tox.ini*
+[flake8]
+
+        # https://flake8.pycqa.org/en/latest/user/using-hooks.html#usage-with-the-pre-commit-git-hooks-framework
+        # https://github.com/PyCQA/flake8/blob/main/src/flake8/defaults.py
+        # See the defaults for everything above before you change anything
+
+        # PEP-8 The following are ignored:
+        # E731 do not assign a lambda expression, use a def
+        # E203 whitespace before ':'
+        # E501 line too long
+        # W503 line break before binary operator
+        # W605 invalid escape sequence
+        # https://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-extend-exclude
+        extend-exclude = .venv
+        # https://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-extend-ignore
+        extend-ignore = E731, E203, E501, W503, W605
+        # https://flake8.pycqa.org/en/latest/user/options.html#cmdoption-flake8-max-complexity
+        max-complexity = 10
+        # https://stackoverflow.com/questions/65809122/how-to-format-this-code-so-that-flake8-is-happy/65908896#65908896
+        # Make the changes as per the answer above to make flake8 compatible with black
+        # https://black.readthedocs.io/en/stable/guides/using_black_with_other_tools.html#flake8
+        max-line-length = 88
+
+1. Add a hook for flake8 inside *.pre-commit-config.yml*
+
+        - repo: https://github.com/PyCQA/flake8
+          rev: 4.0.1
+          # https://flake8.pycqa.org/en/latest/user/using-hooks.html
+          hooks:
+                - id: flake8
+                  description: Command-line utility for enforcing style consistency across Python projects.
+                  require_serial: true
+
+1. Add a line inside *tox.ini* to run flake8 in verbose mode
+
+        poetry run flake8 --verbose
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup flake8
+        git push origin head

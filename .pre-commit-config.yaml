@@ -50,3 +50,11 @@ repos:
     rev: v2.28.0
     hooks:
       - id: commitizen
+
+  - repo: https://github.com/PyCQA/flake8
+    rev: 4.0.1
+    # https://flake8.pycqa.org/en/latest/user/using-hooks.html
+    hooks:
+      - id: flake8
+        description: Command-line utility for enforcing style consistency across Python projects.
+        require_serial: true
