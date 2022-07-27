@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "news"
+version = "0.1.0"
+description = "Load news items from various RSS feeds and store them to postgres database"
+authors = ["Vivek Ramesh <coinhexa@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+
+[tool.poetry.scripts]
+news = "news.main:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
