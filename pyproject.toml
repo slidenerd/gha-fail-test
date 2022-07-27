@@ -18,6 +18,7 @@ pytest-clarity = "^1.0.1"
 flake8 = "^4.0.1"
 flake8-bugbear = "^22.7.1"
 flake8-docstrings = "^1.6.0"
+black = "^22.6.0"
 
 [tool.poetry.scripts]
 news = "news.main:main"

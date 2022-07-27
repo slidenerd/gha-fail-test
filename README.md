@@ -540,3 +540,47 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup flake8-docstrings
         git push origin head
+
+### 12. Setup black
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install black
+
+        poetry add --dev black
+
+1. Check if black is installed properly
+
+        poetry run black --version
+
+1. Help
+
+        poetry run black --help
+
+1. Add a hook for black inside *.pre-commit-config.yml*
+
+        - repo: https://github.com/psf/black
+          rev: 22.6.0
+          # https://black.readthedocs.io/en/stable/integrations/source_version_control.html#version-control-integration
+          hooks:
+                - description: The uncompromising Python code formatter
+                  id: black
+                  args: [src, tests, --verbose]
+                  require_serial: true
+
+1. Add a comment to the *tox.ini* configuration file under the section [flake8] referencing the minimal setup needed to make flake8 work with black
+1. Add a line inside *tox.ini* to run black in verbose mode
+
+        poetry run black src tests --verbose
+
+1. Run black without formatting to only show what will change
+
+        poetry run black src tests --diff
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup black
+        git push origin head
