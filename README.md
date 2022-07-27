@@ -467,3 +467,39 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup flake8
         git push origin head
+
+### 10. Setup flake8-bugbear
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install flake8-bugbear
+
+        poetry add --dev flake8-bugbear
+
+1. Check if flake8-bugbear is installed properly. The command below should show flake8-bugbear in the output
+
+        poetry run flake8 --version
+
+1. Add a line to *tox.ini* configuration file under[flake8] to enable flake8-bugbear optional warnings
+
+        # https://github.com/PyCQA/flake8-bugbear
+        extend-select = B9
+
+1. Modify *.pre-commit-config.yaml* file to add flake8-bugbear as an additional dependency
+
+        - repo: https://github.com/PyCQA/flake8
+          rev: 4.0.1
+          # https://flake8.pycqa.org/en/latest/user/using-hooks.html
+          hooks:
+                - additional_dependencies: [flake8-bugbear==22.7.1]
+                  id: flake8
+                  description: Command-line utility for enforcing style consistency across Python projects.
+                  require_serial: true
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup flake8-bugbear
+        git push origin head
