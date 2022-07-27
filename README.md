@@ -308,3 +308,60 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup commitizen
         git push origin head
+
+### 6. Setup pytest-cov
+
+1. Create new branch
+
+        git checkout -b wip/setup-code-quality-tools
+
+1. Install pytest-cov
+
+        poetry add --dev pytest-cov
+
+1. Check if coverage is installed properly
+
+        poetry run coverage --version
+
+1. Help
+
+        # https://coverage.readthedocs.io/en/6.4.2/cmd.html#command-line-usage
+        poetry run coverage help
+        poetry run coverage help run
+        poetry run coverage run --help
+
+1. Erase collected data
+
+        # https://coverage.readthedocs.io/en/6.4.2/cmd.html#erase-data-coverage-erase
+        poetry run coverage erase
+
+1. Debug coverage file
+
+        # https://coverage.readthedocs.io/en/6.4.2/cmd.html#diagnostics-coverage-debug
+        poetry run coverage debug --help
+        poetry run coverage debug data
+        poetry run coverage debug sys
+        poetry run coverage debug config
+
+1. Add the following sections to *pyproject.toml*
+
+        # https://coverage.readthedocs.io/en/6.4.2/config.html#syntax
+        [tool.coverage.run]
+        # https://coverage.readthedocs.io/en/6.4.2/config.html#run-branch
+        branch = true
+        # https://coverage.readthedocs.io/en/6.4.2/config.html#run-source
+        source = ["news"]
+
+        [tool.coverage.report]
+        # https://coverage.readthedocs.io/en/6.4.2/config.html#report-fail-under
+        fail_under = 100
+
+1. Modify the pytest command inside *tox.ini* so that it collects coverage only from src
+
+        poetry run pytest --cov
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup coverage with pytest-cov
+        git push origin head

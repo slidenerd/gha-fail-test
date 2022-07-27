@@ -1,6 +1,8 @@
 """The main module."""
 
 
+add = lambda x, y: x + y
+
 def main():
     print('hello from news')
-    return 1
+    return add(0, 1)

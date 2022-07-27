@@ -12,6 +12,7 @@ pytest = "^7.1.2"
 tox = "^3.25.1"
 pre-commit = "^2.20.0"
 commitizen = "^2.29.1"
+pytest-cov = "^3.0.0"
 
 [tool.poetry.scripts]
 news = "news.main:main"
@@ -20,6 +21,18 @@ news = "news.main:main"
 name = "cz_conventional_commits"
 version = "0.1.0"
 tag_format = "v$major.$minor.$patch$prerelease"
+
+
+# https://coverage.readthedocs.io/en/6.4.2/config.html#syntax
+[tool.coverage.run]
+# https://coverage.readthedocs.io/en/6.4.2/config.html#run-branch
+branch = true
+# https://coverage.readthedocs.io/en/6.4.2/config.html#run-source
+source = ["news"]
+
+[tool.coverage.report]
+# https://coverage.readthedocs.io/en/6.4.2/config.html#report-fail-under
+fail_under = 100
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
