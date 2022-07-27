@@ -13,6 +13,7 @@ tox = "^3.25.1"
 pre-commit = "^2.20.0"
 commitizen = "^2.29.1"
 pytest-cov = "^3.0.0"
+pytest-sugar = "^0.9.5"
 
 [tool.poetry.scripts]
 news = "news.main:main"

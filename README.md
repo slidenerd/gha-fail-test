@@ -365,3 +365,23 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup coverage with pytest-cov
         git push origin head
+
+### 7. Setp pytest-sugar
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install pytest-sugar
+
+        poetry add --dev pytest-sugar
+
+1. Run pytest without sugar
+
+        poetry run pytest --cov -p no:sugar
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup pytest-sugar
+        git push origin head
