@@ -69,3 +69,12 @@ repos:
         description: The uncompromising Python code formatter
         id: black
         require_serial: true
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.10.1
+    # https://pycqa.github.io/isort/docs/configuration/pre-commit.html#isort-pre-commit-step
+    hooks:
+      - args: [--verbose]
+        description: Library to sort imports alphabetically, and automatically separated into sections and by type
+        id: isort
+        require_serial: true

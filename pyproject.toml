@@ -19,6 +19,7 @@ flake8 = "^4.0.1"
 flake8-bugbear = "^22.7.1"
 flake8-docstrings = "^1.6.0"
 black = "^22.6.0"
+isort = "^5.10.1"
 
 [tool.poetry.scripts]
 news = "news.main:main"
@@ -39,6 +40,21 @@ source = ["news"]
 [tool.coverage.report]
 # https://coverage.readthedocs.io/en/6.4.2/config.html#report-fail-under
 fail_under = 100
+
+[tool.isort]
+# https://pycqa.github.io/isort/docs/configuration/black_compatibility.html#using-a-config-file-such-as-isortcfg
+# https://pycqa.github.io/isort/docs/configuration/profiles.html
+profile = "black"
+# https://pycqa.github.io/isort/docs/configuration/options.html#src-paths
+src_paths = ["src", "tests"]
+# https://pycqa.github.io/isort/docs/configuration/options.html#skip-gitignore
+skip_gitignore = true
+# https://pycqa.github.io/isort/docs/configuration/options.html#force-single-line
+force_single_line = true
+# https://pycqa.github.io/isort/docs/configuration/options.html#atomic
+atomic = true
+# https://pycqa.github.io/isort/docs/configuration/options.html#color-output
+color_output = true
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

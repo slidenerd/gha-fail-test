@@ -584,3 +584,72 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup black
         git push origin head
+
+### 13. Setup isort
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install isort
+
+        poetry add --dev isort
+
+1. Check if isort is installed properly
+
+        poetry run isort --version
+
+1. Help
+
+        poetry run isort --help
+
+1. Modify *pyproject.toml* file to add the following lines
+
+        # https://pycqa.github.io/isort/docs/configuration/black_compatibility.html#using-a-config-file-such-as-isortcfg
+        [tool.isort]
+        # https://pycqa.github.io/isort/docs/configuration/profiles.html
+        profile = black
+        # https://pycqa.github.io/isort/docs/configuration/options.html#src-paths
+        src_paths = src,tests
+        # https://pycqa.github.io/isort/docs/configuration/options.html#skip-gitignore
+        skip_gitignore = true
+        # https://pycqa.github.io/isort/docs/configuration/options.html#force-single-line
+        force_single_line = true
+        # https://pycqa.github.io/isort/docs/configuration/options.html#atomic
+        atomic = true
+        # https://pycqa.github.io/isort/docs/configuration/options.html#color-output
+        color_output = true
+
+1. Add a hook for isort inside *.pre-commit-config.yaml*
+
+        - repo: https://github.com/pycqa/isort
+          rev: 5.10.1
+          # https://pycqa.github.io/isort/docs/configuration/pre-commit.html#isort-pre-commit-step
+          hooks:
+                - args: [--verbose]
+                  description: Library to sort imports alphabetically, and automatically separated into sections and by type
+                  id: isort
+                  require_serial: true
+
+1. Add a line inside *tox.ini* to run isort in verbose mode
+
+        poetry run isort . --verbose
+
+1. Show the changes that isort will make without making those changes
+
+        poetry run isort . --diff
+
+1. Show current isort configuration
+
+        poetry run isort . --show-config
+
+1. Show files on which isort will run
+
+        poetry run isort . --show-files
+
+1. Modify *main.py* with incorrectly ordered imports to check if isort fixes them before committing
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup isort
+        git push origin head
