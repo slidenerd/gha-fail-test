@@ -20,6 +20,7 @@ flake8-bugbear = "^22.7.1"
 flake8-docstrings = "^1.6.0"
 black = "^22.6.0"
 isort = "^5.10.1"
+bandit = "^1.7.4"
 
 [tool.poetry.scripts]
 news = "news.main:main"

@@ -78,3 +78,13 @@ repos:
         description: Library to sort imports alphabetically, and automatically separated into sections and by type
         id: isort
         require_serial: true
+
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.7.4
+    # https://bandit.readthedocs.io/en/latest/start.html#version-control-integration
+    hooks:
+      - args: [--verbose]
+        description: Bandit is a tool for finding common security issues in Python code
+        # The config file's exclude seems to have no effect here, so adding a separate exclude clause
+        exclude: tests/.*$
+        id: bandit

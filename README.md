@@ -653,3 +653,44 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup isort
         git push origin head
+
+### 14. Setup bandit
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install bandit
+
+        poetry add --dev bandit
+
+1. Check if bandit is installed properly
+
+        poetry run bandit --version
+
+1. Help
+
+        poetry run bandit --help
+
+1. Add a hook for bandit inside *.pre-commit-config.yaml* file
+
+        - repo: https://github.com/PyCQA/bandit
+        rev: 1.7.4
+        # https://bandit.readthedocs.io/en/latest/start.html#version-control-integration
+        hooks:
+                - args: [--verbose]
+                  description: Bandit is a tool for finding common security issues in Python code
+                  # The config file's exclude seems to have no effect here, so adding a separate exclude clause
+                  exclude: tests/.*$
+                  id: bandit
+
+1. We run bandit only on files contained in the *src* folder and not on *tests*
+1. Add a line inside *tox.ini* to run bandit in verbose mode recursively inside *src* folder
+
+        poetry run bandit src --recursive --verbose
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup bandit
+        git push origin head
