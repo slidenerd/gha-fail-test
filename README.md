@@ -212,3 +212,55 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         git commit -m "build: setup tox"
         git push origin head
+
+### 4. Setup pre-commit
+
+1. Switch branch
+
+        git switch wip/setup-project
+
+1. Install pre-commit
+
+        poetry add --dev pre-commit
+
+1. Check if installation was successful
+
+        poetry run pre-commit --version
+
+1. Create *.pre-commit-config.yaml* with only one repo inside, namely *pre-commit-hooks*
+1. Install pre-commit hooks
+
+        poetry run pre-commit install
+
+1. Modify *.pre-commit-config.yaml* file to add all the necessary checks
+
+1. Run pre-commit
+
+        poetry run pre-commit run --all-files
+
+1. Run pre-commit in verbose mode
+
+        poetry run pre-commit run --all-files --verbose
+
+1. Update hooks to their latest version
+
+        poetry run pre-commit autoupdate
+
+1. Clean pre-commit cache
+
+        poetry run pre-commit clean && poetry run pre-commit gc
+
+1. Uninstall pre-commit
+
+        poetry run pre-commit uninstall
+
+1. Modify *tox.ini* and add a line under [testenv]
+
+        # https://pre-commit.com/#usage-with-tox
+        passenv = SSH_AUTH_SOCK
+
+1. Save changes
+
+        git add .
+        git commit -m "build: setup pre-commit"
+        git push origin head

@@ -1,0 +1,44 @@
+
+# See https://pre-commit.com for more information
+# See https://pre-commit.com/hooks.html for more hooks
+# https://stackoverflow.com/questions/64935598/git-pre-commit-get-all-python-files
+default_language_version:
+  python: python3.10
+
+default_stages: [commit, push]
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.3.0
+    hooks:
+      # https://github.com/pre-commit/pre-commit-hooks#check-ast
+      - id: check-ast
+        description: Simply checks whether the files parse as valid python.
+        types: [python]
+
+      # https://github.com/pre-commit/pre-commit-hooks#check-added-large-files
+      - id: check-added-large-files
+        description: prevents giant files from being committed.
+
+      # https://github.com/pre-commit/pre-commit-hooks#check-json
+      - id: check-json
+        description: Checks json files for parseable syntax.
+        types: [json]
+
+      # https://github.com/pre-commit/pre-commit-hooks#check-toml
+      - id: check-toml
+        description: Checks toml files for parseable syntax.
+        types: [toml]
+
+      # https://github.com/pre-commit/pre-commit-hooks#check-yaml
+      - id: check-yaml
+        description: Checks yaml files for parseable syntax.
+        types: [yaml]
+
+      # https://github.com/pre-commit/pre-commit-hooks#end-of-file-fixer
+      - id: end-of-file-fixer
+        description: Ensures that a file is either empty, or ends with one newline.
+
+      # https://github.com/pre-commit/pre-commit-hooks#trailing-whitespace
+      - id: trailing-whitespace
+        description: Trims trailing whitespace.
