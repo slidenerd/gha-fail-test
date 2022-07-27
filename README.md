@@ -264,3 +264,47 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         git commit -m "build: setup pre-commit"
         git push origin head
+
+### 5. Setup commitizen
+
+1. Switch branch
+
+        git switch wip/setup-project
+
+1. Install commitizen
+
+        poetry add --dev commitizen
+
+1. Help
+
+        poetry run cz --help
+
+1. Run commitizen init
+
+        poetry run cz init
+        Please choose a supported config file: (default: pyproject.toml)
+        pyproject.toml
+        Please choose a cz (commit rule): (default: cz_conventional_commits)
+        cz_conventional_commits
+        # https://commitizen-tools.github.io/commitizen/bump/#tag_format
+        Please enter the correct version format: (default: "$version")
+        v$major.$minor.$patch$prerelease
+        Do you want to install pre-commit hook?
+        Yes
+
+1. Change version to 0.1.0 under [tool.commitizen] inside *pyproject.toml*
+1. Check if all previous commit messages follow conventional commit standards
+
+        poetry run cz check --rev-range main..HEAD
+
+1. Check if commitizen works by doing a commit message with incorrect format
+
+        git add .
+        git commit -m "this should fail"
+
+1. Undo staged files if any from the previous step and now add the correct commit message
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup commitizen
+        git push origin head
