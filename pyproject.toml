@@ -24,6 +24,7 @@ bandit = "^1.7.4"
 mypy = "^0.971"
 typeguard = "^2.13.3"
 darglint = "^1.8.1"
+xdoctest = "^1.0.1"
 
 [tool.poetry.scripts]
 news = "news.main:main"

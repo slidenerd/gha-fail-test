@@ -850,3 +850,39 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup darglint
         git push origin head
+
+### 19. Setup xdoctest
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install xdoctest
+
+        poetry add --dev xdoctest
+
+1. Help
+
+        poetry run xdoctest --help
+
+1. Modify *main.py* to add an incorrect doc to check if xdoctest catches it
+
+        Example:
+                >>> add(0, 1)
+                2
+
+1. Change the above result with the correct one following the error
+
+        Example:
+                >>> add(0, 1)
+                1
+
+1. Modify the pytest command inside *tox.ini* to run xdoctest
+
+        poetry run pytest --typeguard-packages=news --xdoctest --cov
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup xdoctest
+        git push origin head

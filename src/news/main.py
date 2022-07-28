@@ -11,6 +11,10 @@ add: Callable[[int, int], int] = lambda x, y: x + y
 def main() -> int:
     """Entry point.
 
+    Example:
+        >>> add(0, 1)
+        1
+
     Returns:
         The sum of 0 and 1
     """
