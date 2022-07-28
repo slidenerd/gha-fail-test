@@ -793,3 +793,22 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup typeguard
         git push origin head
+
+### 17. Setup pyupgrade
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Modify *.pre-commit-config.yaml* file to add a hook for pyupgrade
+
+        - repo: https://github.com/asottile/pyupgrade
+          rev: v2.37.2
+          hooks:
+                - id: pyupgrade
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup pyupgrade
+        git push origin head
