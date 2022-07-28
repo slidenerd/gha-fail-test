@@ -812,3 +812,41 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup pyupgrade
         git push origin head
+
+### 18.Setup darglint
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install darglint
+
+        poetry add --dev darglint
+
+1. Check if darglint was installed successfully
+
+        poetry run darglint --version
+
+1. Run darglint in verbose mode
+
+        poetry run darglint src --verbosity=2
+        poetry run darglint tests --verbosity=2
+
+1. Modify *.pre-commit-config.yaml* file to add a hook for darglint
+
+        - repo: https://github.com/terrencepreilly/darglint
+          rev: v1.8.1
+          hooks:
+                - description: A functional docstring linter which checks whether a docstring's description matches the actual function/method implementation.
+                  id: darglint
+
+1. Modify *tox.ini* to add a setting for darglint under [flake8]
+
+        # https://github.com/terrencepreilly/darglint#flake8
+        docstring_style = google
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup darglint
+        git push origin head

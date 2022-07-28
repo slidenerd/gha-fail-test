@@ -101,3 +101,9 @@ repos:
     rev: v2.37.2
     hooks:
       - id: pyupgrade
+
+  - repo: https://github.com/terrencepreilly/darglint
+    rev: v1.8.1
+    hooks:
+      - description: A functional docstring linter which checks whether a docstring's description matches the actual function/method implementation.
+        id: darglint
