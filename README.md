@@ -913,3 +913,16 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to docs: add badges to README
         git push origin head
+
+### 21. Add GitHub templates
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Add templates for issue, feature, pull request and question and a config file to disable creating blank issues
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to docs: setup github templates
+        git push origin head
