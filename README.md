@@ -1,5 +1,19 @@
 # News
 
+[https://pre-commit.com/#badging-your-repository]::
+
+[https://github.com/PyCQA/flake8/issues/1256]::
+
+[https://black.readthedocs.io/en/stable/#show-your-style]::
+
+[https://pycqa.github.io/isort/#spread-the-word]::
+
+[https://github.com/PyCQA/bandit#show-your-style]::
+
+[https://github.com/python/mypy/blob/master/README.md]::
+
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit) [![linter: flake8](https://img.shields.io/badge/linter-flake8-success)](https://gitlab.com/pycqa/flake8) [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black) [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/) [![security: bandit](https://img.shields.io/badge/security-bandit-yellow.svg)](https://github.com/PyCQA/bandit) [![Checked with mypy](http://www.mypy-lang.org/static/mypy_badge.svg)](http://mypy-lang.org/)
+
 Load news items from various RSS feeds and store them to postgres database
 
 [https://bryanavery.co.uk/github-naming-repositories/]::
@@ -885,4 +899,17 @@ Load news items from various RSS feeds and store them to postgres database
 
         git add .
         poetry run cz commit # set message to build: setup xdoctest
+        git push origin head
+
+### 20. Add badges in README
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Find README badges wherever available for the above libraries and add them to *README.md*
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to docs: add badges to README
         git push origin head
