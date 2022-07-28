@@ -22,6 +22,7 @@ black = "^22.6.0"
 isort = "^5.10.1"
 bandit = "^1.7.4"
 mypy = "^0.971"
+typeguard = "^2.13.3"
 
 [tool.poetry.scripts]
 news = "news.main:main"

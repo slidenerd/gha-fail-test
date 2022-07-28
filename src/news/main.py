@@ -19,3 +19,8 @@ def main() -> int:
         sys.version,
     )
     return add(0, 1)
+
+
+def check_if_typeguard_works(num: int) -> int:
+    """A function to check if typeguard is running correctly."""
+    return num

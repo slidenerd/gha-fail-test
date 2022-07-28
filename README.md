@@ -746,3 +746,50 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup mypy
         git push origin head
+
+### 16. Setup typeguard
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install typeguard
+
+        poetry add --dev typeguard
+
+1. Modify *main.py* by adding the function below to check if typeguard works
+
+        def check_if_typeguard_works(num: int) -> int:
+                """A function to check if typeguard is running correctly."""
+                return num
+
+1. Modify *test_main.py* by adding the following lines to test the function defined above
+
+        import pytest
+        from news.main import check_if_typeguard_works
+        def test_typeguard() -> None:
+                """This function will test if typeguard is working or not."""
+                import json
+
+                data = json.loads('{ "language": "wtf" }')
+                with pytest.raises(TypeError):
+                        check_if_typeguard_works(data["language"])
+
+1. Tests should fail if run currently
+
+        poetry run pytest --cov
+
+1. To make the tests suceed, setup pytest with typeguard checks
+
+        poetry run pytest --typeguard-packages=news --cov
+
+1. Modify the pytest command inside *tox.ini*
+
+        # https://typeguard.readthedocs.io/en/latest/userguide.html#using-the-pytest-plugin
+        poetry run pytest --typeguard-packages=news --cov
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup typeguard
+        git push origin head
