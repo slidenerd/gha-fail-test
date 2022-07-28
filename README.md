@@ -694,3 +694,55 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to build: setup bandit
         git push origin head
+
+### 15. Setup mypy
+
+1. Switch branch
+
+        git switch wip/setup-code-quality-tools
+
+1. Install mypy
+
+        poetry add --dev mypy
+
+1. Check if mypy is installed properly
+
+        poetry run mypy --help
+
+1. Modify *pyproject.toml* file to add the following lines
+
+        # https://mypy.readthedocs.io/en/stable/config_file.html#example-pyproject-toml
+        [tool.mypy]
+        # What mypy excludes by default https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-exclude
+        # https://mypy.readthedocs.io/en/stable/command_line.html#cmdoption-mypy-pretty
+        pretty = true
+        # https://mypy.readthedocs.io/en/stable/config_file.html#configuring-error-messages
+        show_column_numbers = true
+        show_error_codes = true
+        show_error_context = true
+        # https://mypy.readthedocs.io/en/stable/config_file.html#confval-strict
+        strict = true
+        # https://mypy.readthedocs.io/en/stable/config_file.html#configuring-warnings
+        warn_unreachable = true
+
+1. Add a hook for mypy inside *.pre-commit-config.yaml* file
+
+        - repo: https://github.com/pre-commit/mirrors-mypy
+          rev: v0.971
+          hooks:
+                - args: ["--verbose"]
+                  description: Type checking for Python
+                  exclude: tests/.*$
+                  id: mypy
+
+1. Add an empty *py.typed* file
+1. We run mypy only on files contained in the *src* folder and not on *tests*
+1. Add a line inside *tox.ini* to run mypy in verbose mode inside the *src* folder
+
+        poetry run mypy src --verbose
+
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup mypy
+        git push origin head
