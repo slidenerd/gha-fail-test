@@ -1,0 +1,56 @@
+
+
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Run tests
+
+on:
+  push:
+    branches:
+      - main
+      - test/github-actions
+  pull_request:
+    branches:
+      - main
+      - test/github-actions
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10"]
+
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+
+      # https://github.com/actions/setup-python/issues/369
+      - name: Install poetry
+        run: |
+          curl -O -sSL https://install.python-poetry.org/install-poetry.py
+          python install-poetry.py -y --version 1.1.14
+          echo "PATH=${HOME}/.poetry/bin:${PATH}" >> $GITHUB_ENV
+          rm install-poetry.py
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: 'poetry'
+
+      #----------------------------------------------
+      # install dependencies if cache does not exist
+      #----------------------------------------------
+      - name: Install dependencies
+        # https://github.com/actions/setup-python/issues/374#issuecomment-1088938718
+        run: |
+          poetry env use ${{ matrix.python-version }}
+          poetry install --no-interaction
+      #----------------------------------------------
+      #              run test suite
+      #----------------------------------------------
+      - name: Run pytest with coverage, xdoctest and typeguard
+        run: poetry run tox

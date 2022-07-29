@@ -926,3 +926,30 @@ Load news items from various RSS feeds and store them to postgres database
         git add .
         poetry run cz commit # set message to docs: setup github templates
         git push origin head
+
+### 22. Add Github Actions
+
+#### 1. Run Tests
+
+1. Create a new branch.
+
+        git checkout -b test/github-actions
+
+1. Push this branch to remote without making any changes
+
+        git push origin test/github-actions
+
+1. Create another new branch
+
+        git checkout -b wip/github-actions
+
+1. Use the *wip/github-actions* branch to add code containing GitHub actions
+1. Add a *.github/workflows/constraints.txt* file containing specific versions for pip, virtualenv and poetry
+1. Add a *.github/workflows/tests.yml* containing our GitHub action for running tests on CI
+1. Save changes
+
+        git add .
+        poetry run cz commit # set message to build: setup github actions to run tests
+        git push origin wip/github-actions
+
+1. Do a pull request from *wip/github-actions* to *test/github-actions* to check if the tests are executing perfectly on GitHub
